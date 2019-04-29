@@ -163,10 +163,10 @@ def rename_match_file_name(file_dir, file_list):
             # .lower()转化成小写再比较,防止无法匹配1ST的情况
             # 处理diff_string = 上半场的情况,可以将原本位于文件名尾部的"上半场"在文件名钱标注出来
             if diff_string == "1" or diff_string.lower() == "1st" or diff_string == "上半场":
-                new_file_name_prefix = "上半场 "
+                new_file_name_prefix = "1-上半场 "
             elif diff_string == "2" or diff_string.lower() == "2nd" \
                     or diff_string == "下半场":
-                new_file_name_prefix = "下半场 "
+                new_file_name_prefix = "2-下半场 "
             else:
                 continue
 
