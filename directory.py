@@ -73,6 +73,7 @@ def move_same_match_files_to_directory(file_dir):
 
         if delete_first_letter_file_name_list != []:
             # 当该目录下有视频文件时，查找delete_first_letter_file_name_list中的重复的文件名称
+            import collections
             dup_file_name_list = [item for item, count in
                                   collections.Counter(
                                       delete_first_letter_file_name_list).items()
@@ -157,7 +158,7 @@ def create_dir_for_match_files_main(file_dir, ext_list):
                 if extension not in ext_list:
                     continue
                 files.remove(file)
-                # 　参考　https://stackoverflow.com/a/47820184/1314124
+                #参考　https://stackoverflow.com/a/47820184/1314124
                 similar_file_list = get_close_matches(file, files, cutoff=0.9)
                 if similar_file_list:
                     similar_file_list.append(file)

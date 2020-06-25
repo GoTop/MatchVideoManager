@@ -85,6 +85,25 @@ def format_date_string_2(string_with_date):
 
     return string_with_date
 
+def remove_qm5_string(src_dir_path):
+    """
+    qm5.cc网站上传到百度云的视频文件会以'qm5'作为视频文件的后缀，比如:
+    【球迷网-www.qm5.cc】2020年6月21日 英超第30轮 阿斯顿维拉vs切尔西 PPTV国语-娄一晨+刘越+朱迟蕊 1080P.mkv.qm5
+
+    本函数会将文件中的'.qm5'字符串删除
+    :param file_name:
+    :return:
+    """
+    for root, dirs, files in os.walk(src_dir_path, topdown=False):
+        # 对file_dir目录下的文件名称进行替换
+        for file_name in files:
+            file_path, file_name_without_ext, extension = \
+                get_filePath_fileName_fileExt(
+                    file_name)
+            origin_file_name = file_name
+
+            new_file_name = file_name.replace('.qm5', '')
+            rename_file(root, origin_file_name, new_file_name)
 
 def add_date_string(string_with_date):
     """
@@ -199,6 +218,8 @@ def strip_file_name(file_path):
     """
 
     file_path, file_name, extension = get_filePath_fileName_fileExt(file_path)
+    # 将 + 号替换成空格
+    file_name = re.sub("\+", " ", file_name)
     # 将前后有空格的-替换成空格，不替换前后不是空格的-，比如2018-19，
     file_name = re.sub(r"(\s+-+\s+|\s+-+|-+\s+)", " ", file_name)
     # 将连续的空格替换成一个空格

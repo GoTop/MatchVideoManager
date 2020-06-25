@@ -7,7 +7,8 @@ import re
 from directory import create_dir_for_match_files_main, move_dir_to_dir, \
     move_files_to_dir_with_dir_structure
 from file import rename_match_file_name_main, rename_file, strip_file_name, \
-    format_date_string_2, add_date_string, get_filePath_fileName_fileExt
+    format_date_string_2, add_date_string, get_filePath_fileName_fileExt, \
+    remove_qm5_string
 from string_fns import find_date_string_and_format
 
 """
@@ -34,17 +35,33 @@ src_dir_path = r"J:\BaiduNetdiskDownload\足球"
 # 设置需要移动视频文件到的目录
 dst_dir_path = r"J:\Video\Download\YouTube\playlist\足球"
 # file_dir = r"J:\Video\Download\YouTube\playlist\足球"
-extensions = ['.mkv', '.mp4', '.ts', ]
+extensions = ['.mkv', '.mp4', '.ts', '.qm5']
+
 replace_string_list = ['【天下足球网www.txzqw.cc】', '【天下足球网www.txzqw.me】',
-                       '17-18赛季', '2018-19赛季', '[52waha]',
+                       '[52waha]',
                        '[Young_Andy]', '【哇哈體育】', '【哇哈体育】', '[球迷网www.qm5.cc]',
-                       '【90分钟足球网】',
-                       '【90分钟足球网】', '高清国语', 'hdtv', '720P', '1080P.', '1080P',
+                       '【球迷网-www.qm5.cc】',
+                       '【90分钟足球网】', '【劲爆足球网www.jzwzx.com】', '【劲爆足球网】',
+                       '【90分钟足球网】', '魅力高清国语', '魅力音乐', '魅力足球',
+                       # '18-19赛季'要在'2018-19赛季'的后面
+                       '2018-19赛季', '2019-20赛季', '18-19赛季', '19-20赛季',
+                       '2018-19',
+                       '高清国语', 'hdtv', '720P', '1080P.',
+                       '1080P',
                        '1080i',
-                       '1080', 'CCTV5HD .', 'CCTV5HD.',
+                       '1080', 'CCTV5HD .', 'CCTV5HD.', 'CNTV',
                        'CCTV5+', 'CCTV5', '新视觉', 'PPTV', 'PP体育', '1070P',
-                       '新英', '百视通', '海角主', 'hdtv', 'HD', '国语', '2018-19',
-                       'besTV', '无台标', '收藏版']
+                       '高清(50fps)',
+                       # 过滤mkv这个字符串会把文件名中后缀名为.mkv的视频文件的后缀名删除
+                       # 'MKV',
+                       '新英', '百视通', '爱奇艺体育', '爱奇艺', '海角主', 'hdtv', 'HD', '国语',
+                       'besTV', '无台标', '收藏版', '录播',
+                       ]
+
+commentator = ['詹俊', '刘越', '娄一晨', '李彦', '刘腾', '贺宇', '申方剑', '孟洪涛', '林梦鸽', '陈渤胄',
+               '张力', '朱迟蕊', '刘畅', '苗霖', '董路', '鲁靖明', '张力', ]
+
+replace_string_list = replace_string_list + commentator
 
 # 测试使用下面设置
 # src_dir_path = r"J:\Video\Download\YouTube\playlist\NA"
@@ -53,6 +70,9 @@ replace_string_list = ['【天下足球网www.txzqw.cc】', '【天下足球网w
 
 if __name__ == "__main__":
     # move_same_match_files_to_directory(file_dir)
+
+    remove_qm5_string(src_dir_path)
+
     # 先将有类似的两个视频文件放入同一目录中
     create_dir_for_match_files_main(src_dir_path, extensions)
     # 遍历目录，根据同一目录下，两个视频文件名中不同的部分(比如1或2，1st或2nd)，
@@ -68,10 +88,12 @@ if __name__ == "__main__":
             file_path, file_name_without_ext, extension = \
                 get_filePath_fileName_fileExt(
                     file_name)
+            origin_file_name = file_name
+
             # 如果遍历的文件的后缀不在指定的extensions视频文件列表中，则不对该文件进行处理
             if extension not in extensions:
                 continue
-            origin_file_name = file_name
+
             # 替换视频文件名中多余的字符串replace_string_list，比如网址，清晰度等
             for replace_string in replace_string_list:
                 # clean_file_name(file_dir, replace_string)
