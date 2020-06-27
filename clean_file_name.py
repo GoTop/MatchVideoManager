@@ -35,7 +35,7 @@ src_dir_path = r"J:\BaiduNetdiskDownload\足球"
 # 设置需要移动视频文件到的目录
 dst_dir_path = r"J:\Video\Download\YouTube\playlist\足球"
 # file_dir = r"J:\Video\Download\YouTube\playlist\足球"
-extensions = ['.mkv', '.mp4', '.ts', '.qm5']
+extensions = ['.mkv', '.mp4', '.ts']
 
 replace_string_list = ['【天下足球网www.txzqw.cc】', '【天下足球网www.txzqw.me】',
                        '[52waha]',
@@ -46,11 +46,11 @@ replace_string_list = ['【天下足球网www.txzqw.cc】', '【天下足球网w
                        # '18-19赛季'要在'2018-19赛季'的后面
                        '2018-19赛季', '2019-20赛季', '18-19赛季', '19-20赛季',
                        '2018-19',
-                       '高清国语', 'hdtv', '720P', '1080P.',
+                       '高清国语', 'hdtv', '720P',
                        '1080P',
-                       '1080i',
-                       '1080', 'CCTV5HD .', 'CCTV5HD.', 'CNTV',
-                       'CCTV5+', 'CCTV5', '新视觉', 'PPTV', 'PP体育', '1070P',
+                       '1080i', '1080',
+                       'CCTV5HD .', 'CCTV5HD.', 'CNTV', 'CCTV5+', 'CCTV5',
+                       '新视觉', 'PPTV', 'PP体育', '1070P',
                        '高清(50fps)',
                        # 过滤mkv这个字符串会把文件名中后缀名为.mkv的视频文件的后缀名删除
                        # 'MKV',
@@ -59,7 +59,7 @@ replace_string_list = ['【天下足球网www.txzqw.cc】', '【天下足球网w
                        ]
 
 commentator = ['詹俊', '刘越', '娄一晨', '李彦', '刘腾', '贺宇', '申方剑', '孟洪涛', '林梦鸽', '陈渤胄',
-               '张力', '朱迟蕊', '刘畅', '苗霖', '董路', '鲁靖明', '张力', ]
+               '张力', '朱迟蕊', '刘畅', '苗霖', '董路', '鲁靖明', '张力', '梁祥宇', '李欣']
 
 replace_string_list = replace_string_list + commentator
 
@@ -111,7 +111,7 @@ if __name__ == "__main__":
             new_file_name = find_date_string_and_format(file_name)
             new_file_name = add_date_string(new_file_name)
 
-            # 去除文件名中多余的空格和-
+            # 去除文件名中多余的空格和-,+,(,)
             new_file_name = strip_file_name(new_file_name)
             rename_file(root, origin_file_name, new_file_name)
 
@@ -138,7 +138,7 @@ if __name__ == "__main__":
             new_dir_name = find_date_string_and_format(dir_name)
             new_dir_name = add_date_string(new_dir_name)
 
-            # 去除文件名中多余的空格和-
+            # 去除文件名中多余的空格和-,+,(,)
             new_dir_name = strip_file_name(new_dir_name)
             rename_file(root, origin_dir_name, new_dir_name)
 
