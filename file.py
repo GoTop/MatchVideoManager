@@ -41,11 +41,11 @@ def rename_file(root, old_file_name, new_file_name):
         try:
             # 对文件或者目录名进行修改
             os.rename(old_file_path, new_file_path)
-            if os.path.isfile(old_file_path):
-                print('/n 将"{}"文件名替换为"{}"'.format(old_file_path, new_file_path))
+            if os.path.isfile(new_file_path):
+                print('将"{}"文件名替换为"{}"'.format(old_file_path, new_file_path))
 
-            if os.path.isdir(old_file_path):
-                print('/n将"{}"目录名替换为"{}"'.format(old_file_path, new_file_path))
+            if os.path.isdir(new_file_path):
+                print('将"{}"目录名替换为"{}"'.format(old_file_path, new_file_path))
         except FileExistsError as e:
             print(e)
             print(("错误,需要改名的文件或者目录'{}'已存在,跳过目录'{}'的创建").format(old_file_path,
@@ -198,11 +198,11 @@ def rename_match_file_name(file_dir, file_list):
             if new_file != old_file:
                 try:
                     os.rename(old_file, new_file)
-                    print('/n 成功将{}文件名替换为{}'.format(
+                    print('成功将{}文件名替换为{}'.format(
                         old_file, new_file))
                 except FileExistsError as e:
                     print(e)
-                    print(("/n 错误,需要改名的文件{}已存在,跳过该目录").format(
+                    print(("错误,需要改名的文件{}已存在,跳过该目录").format(
                         old_file))
 
 

@@ -59,7 +59,8 @@ replace_string_list = ['【天下足球网www.txzqw.cc】', '【天下足球网w
                        ]
 
 commentator = ['詹俊', '刘越', '娄一晨', '李彦', '刘腾', '贺宇', '申方剑', '孟洪涛', '林梦鸽', '陈渤胄',
-               '张力', '朱迟蕊', '刘畅', '苗霖', '董路', '鲁靖明', '张力', '梁祥宇', '李欣']
+               '张力', '朱迟蕊', '刘畅', '苗霖', '董路', '鲁靖明', '张力', '梁祥宇', '李欣', '苏东',
+               '吴桐', '刘焕', '盛斌', '刘晶捷', '李子琪']
 
 replace_string_list = replace_string_list + commentator
 
@@ -119,7 +120,7 @@ if __name__ == "__main__":
             # # 如果文件名中有字符串被修改，则将实际的文件进行重命名
             # if new_file_path != old_file_path:
             #     os.rename(old_file_path, new_file_path)
-            #     print('/n 将{}文件名替换为{}'.format(old_file_path, new_file_path))
+            #     print('将{}文件名替换为{}'.format(old_file_path, new_file_path))
         # 对file_dir目录下的目录的名称，该目录下的目录和文件名进行替换
         for dir_name in dirs:
             # 对于resilio sync文件的目录 .sync，不进行替换操作

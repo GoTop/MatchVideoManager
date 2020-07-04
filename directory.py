@@ -157,13 +157,14 @@ def create_dir_for_match_files_main(file_dir, ext_list):
                 # 如果文件的后缀名不在指定的后缀名list中，则跳过该文件
                 if extension not in ext_list:
                     continue
-                files.remove(file)
+                #深复制files变量，这样删除里面的元素不会影响files变量(否则会影响for循环)
+                compare_files=files[:]
+                compare_files.remove(file)
                 #参考　https://stackoverflow.com/a/47820184/1314124
-                similar_file_list = get_close_matches(file, files, cutoff=0.9)
+                similar_file_list = get_close_matches(file, compare_files, cutoff=0.9)
                 if similar_file_list:
                     similar_file_list.append(file)
                     dir_path = create_dir_for_files(file_dir, similar_file_list)
-                    print(similar_file_list)
                     move_files_to_dir(root, dir_path, similar_file_list)
                 else:
                     # 如果该文件没有找到和它类似名称的其他文件，
@@ -172,7 +173,6 @@ def create_dir_for_match_files_main(file_dir, ext_list):
                     # todo 只为视频文件建立目录
                     file_list = [file, file]
                     dir_path = create_dir_for_files(file_dir, file_list)
-                    print(similar_file_list)
                     file_list = [file]
                     move_files_to_dir(root, dir_path, file_list)
 

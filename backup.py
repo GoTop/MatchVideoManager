@@ -33,7 +33,7 @@ def clean_file_name(file_dir, replace_string):
             new_file = os.path.join(root, new_file)
             if new_file != old_file:
                 os.rename(old_file, new_file)
-                print('/n 将{old_file}文件名替换为{new_file}'.format(old_file=old_file,
+                print('将{old_file}文件名替换为{new_file}'.format(old_file=old_file,
                                                               new_file=new_file))
         # 对file_dir目录下的目录的名称，该目录下的目录和文件名进行替换
         for dir_name in dirs:
@@ -51,7 +51,7 @@ def clean_file_name(file_dir, replace_string):
                 try:
                     # 对文件名进行修改
                     os.rename(old_dir, new_dir)
-                    print('/n将{old_dir}目录名替换为{new_dir}'.format(old_dir=old_dir,
+                    print('将{old_dir}目录名替换为{new_dir}'.format(old_dir=old_dir,
                                                                new_dir=new_dir))
                 except FileExistsError as e:
                     print(e)
