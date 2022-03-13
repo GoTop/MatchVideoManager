@@ -102,7 +102,7 @@ def remove_qm5_string(src_dir_path):
                     file_name)
             origin_file_name = file_name
             # 将 + 号替换成空格
-            new_file_name = re.sub("\.qm5$", "", file_name)
+            new_file_name = re.sub("\.qm5$|\.QM5$", "", file_name)
             rename_file(root, origin_file_name, new_file_name)
 
 def add_date_string(string_with_date):
